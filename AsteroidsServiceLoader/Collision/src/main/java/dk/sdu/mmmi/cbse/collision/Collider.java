@@ -32,33 +32,41 @@ public class Collider implements IPostEntityProcessingService {
                 // if the two entities are identical, skip the iteration
                 if (entity.getID().equals(collisionDetection.getID())) {
                     continue;
-
                     // remove entities with zero in expiration
-                }
-                if (entityLife.getExpiration() <= 0) {
-                    world.removeEntity(entity);
-                    // if collisioner expiration is zero or beloq, remove.
-                    if (collisionLife.getExpiration() <= 0) {
-                        world.removeEntity(collisionDetection);
-                    }
                 }
 
                 // CollisionDetection
-                if (this.Collides(entity, collisionDetection)) {
+                if (this.collides(entity, collisionDetection)) {
                     // if entity has been hit, and should have its life reduced
-                    if (entityLife.getLife() > 0) {
-                        entityLife.setLife(entityLife.getLife() - 1);
-                        // if entity is out of life - remove
-                        if (entityLife.getLife() <= 0) {
-                            world.removeEntity(entity);
-                        }
+                    if(entityLife.getStrength() < collisionLife.getStrength())
+                    {
+                        //collision does alot of dmg
+                        entityLife.setLife(entityLife.getLife()-99999);
+                    } else if(collisionLife.getStrength() < entityLife.getStrength())
+                    {
+                        collisionLife.setLife(entityLife.getLife()-99999);
                     }
+                    else{
+                        //ignore same strenght mby do something in th future
+                    }
+                }
+               
+                System.out.println(entityLife.getLife());
+                
+                if (entityLife.getLife() <= 0) {
+                    world.removeEntity(entity);
+                    
+                }
+
+                if (collisionLife.getLife() <= 0)
+                {
+                    world.removeEntity(collisionDetection);
                 }
             }
         }
     }
 
-    public Boolean Collides(Entity entity, Entity entity2) {
+    public Boolean collides(Entity entity, Entity entity2) {
         PositionPart entMov = entity.getPart(PositionPart.class);
         PositionPart entMov2 = entity2.getPart(PositionPart.class);
         float dx = (float) entMov.getX() - (float) entMov2.getX();

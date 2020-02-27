@@ -47,10 +47,12 @@ public class AsteroidPlugin
         asteroid.setColor(new float[]{255f, 0f, 160f, 1f});
         asteroid.add(new MovingPart(0, speed, speed, 0));
         asteroid.add(new PositionPart(x, y, radians));
-        asteroid.add(new LifePart(6, 69));
+        asteroid.add(new LifePart(50, 1));
         asteroid.add(new SplitterPart());
         asteroid.setRadius(15);
-
+        LifePart lifepart = asteroid.getPart(LifePart.class);
+        lifepart.setStrength(8);
+        
         return (Asteroid) asteroid;  
     }
 }
