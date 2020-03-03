@@ -10,6 +10,7 @@ import static dk.sdu.mmmi.cbse.asteroid.AsteroidType.SMALL;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.CollisionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
@@ -40,6 +41,7 @@ public class AsteroidSplitter implements IEntityProcessingService {
                 Asteroid mediumAsteroidTwo = createMediumAsteroid(posPart.getX(), posPart.getY());
                 world.addEntity(mediumAsteroidOne);
                 world.addEntity(mediumAsteroidTwo);
+                world.removeEntity(asteroid);
             }
 
             if (theAsteroid.getSize().equals("MEDIUM") && splitter.ShouldSplit()) {
@@ -48,6 +50,10 @@ public class AsteroidSplitter implements IEntityProcessingService {
                 Asteroid smallAsteroidTwo = createSmallAsteroid(posPart.getX(), posPart.getY());
                 world.addEntity(smallAsteroidOne);
                 world.addEntity(smallAsteroidTwo);
+                world.removeEntity(asteroid);
+            }
+            if (theAsteroid.getSize().equals("SMALL") && splitter.ShouldSplit()) {
+                world.removeEntity(asteroid);
             }
         }
     }
@@ -60,8 +66,9 @@ public class AsteroidSplitter implements IEntityProcessingService {
         asteroid.setColor(new float[]{255f, 0f, 160f, 1f});
         asteroid.add(new MovingPart(0, speed, speed, 0));
         asteroid.add(new PositionPart(x + rnd.nextInt(50), y+rnd.nextInt(50), radians));
-        asteroid.add(new LifePart(2, 69));
+        asteroid.add(new LifePart(1, 1));
         asteroid.add(new SplitterPart());
+        asteroid.add(new CollisionPart(4));
         asteroid.setRadius(5);
 
         return (Asteroid) asteroid;
@@ -76,8 +83,9 @@ public class AsteroidSplitter implements IEntityProcessingService {
         asteroid.setColor(new float[]{255f, 0f, 160f, 1f});
         asteroid.add(new MovingPart(0, speed, speed, 0));
         asteroid.add(new PositionPart(x + rnd.nextInt(50), y + rnd.nextInt(50), radians));
-        asteroid.add(new LifePart(4, 69));
+        asteroid.add(new LifePart(1, 1));
         asteroid.add(new SplitterPart());
+        asteroid.add(new CollisionPart(4));
         asteroid.setRadius(10);
 
         return (Asteroid) asteroid;

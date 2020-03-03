@@ -21,6 +21,7 @@ import static java.lang.Math.sqrt;
 public class MovingPart
         implements EntityPart {
 
+    float vec;
     private float dx, dy;
     private float deceleration, acceleration;
     private float maxSpeed, rotationSpeed;
@@ -60,7 +61,7 @@ public class MovingPart
     public void setUp(boolean up) {
         this.up = up;
     }
-
+    
     @Override
     public void process(GameData gameData, Entity entity) {
         PositionPart positionPart = entity.getPart(PositionPart.class);
@@ -85,7 +86,7 @@ public class MovingPart
         }
 
         // deccelerating
-        float vec = (float) sqrt(dx * dx + dy * dy);
+        vec = (float) sqrt(dx * dx + dy * dy);
         if (vec > 0) {
             dx -= (dx / vec) * deceleration * dt;
             dy -= (dy / vec) * deceleration * dt;

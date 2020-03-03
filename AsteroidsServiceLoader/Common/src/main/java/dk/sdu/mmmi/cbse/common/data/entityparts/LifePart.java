@@ -17,21 +17,10 @@ public class LifePart implements EntityPart {
     private int life;
     private boolean isHit = false;
     private float expiration;
-    private int strength;
 
     public LifePart(int life, float expiration) {
         this.life = life;
         this.expiration = expiration;
-    }
-    
-    public void setStrength(int strength)
-    {
-        this.strength = strength;
-    }
-
-    public int getStrength()
-    {
-        return strength;
     }
     
     public int getLife() {

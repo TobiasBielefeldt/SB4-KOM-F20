@@ -60,7 +60,7 @@ public class AsteroidControlSystem implements IEntityProcessingService {
         float[] shapex = new float[6];
         float[] shapey = new float[6];
         Asteroid asAsteroid = (Asteroid) asteroid;
-//        SplitterPart splitter = asAsteroid.getPart(SplitterPart.class);
+//       SplitterPart splitter = asAsteroid.getPart(SplitterPart.class);
         if(asAsteroid.getSize().equals("LARGE")){
         for (int i = 0; i < numPoints; i++) {
             shapex[i] = x + (float) Math.cos(angle + radians) * 26;

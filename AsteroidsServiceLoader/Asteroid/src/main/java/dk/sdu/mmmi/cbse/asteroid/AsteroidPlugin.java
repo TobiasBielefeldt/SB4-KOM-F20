@@ -4,6 +4,7 @@ import static dk.sdu.mmmi.cbse.asteroid.AsteroidType.LARGE;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.CollisionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
@@ -49,9 +50,8 @@ public class AsteroidPlugin
         asteroid.add(new PositionPart(x, y, radians));
         asteroid.add(new LifePart(50, 1));
         asteroid.add(new SplitterPart());
+        asteroid.add(new CollisionPart(4));
         asteroid.setRadius(15);
-        LifePart lifepart = asteroid.getPart(LifePart.class);
-        lifepart.setStrength(8);
         
         return (Asteroid) asteroid;  
     }

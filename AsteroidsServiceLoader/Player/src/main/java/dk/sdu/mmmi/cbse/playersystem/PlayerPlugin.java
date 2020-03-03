@@ -3,9 +3,11 @@ package dk.sdu.mmmi.cbse.playersystem;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.CollisionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ShootingPart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 
 public class PlayerPlugin implements IGamePluginService {
@@ -39,8 +41,8 @@ public class PlayerPlugin implements IGamePluginService {
         playerShip.add(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed));
         playerShip.add(new PositionPart(x, y, radians));
         playerShip.add(new LifePart(1,1)); 
-        LifePart lifePart = playerShip.getPart(LifePart.class);
-        lifePart.setStrength(2);
+        playerShip.add(new CollisionPart(2));
+        playerShip.add(new ShootingPart(0.5f,1.3f));
         
         return playerShip;
     }
